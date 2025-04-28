@@ -5,56 +5,29 @@ mycursor=mydb.cursor()
 mycursor.execute("USE cltstr;")
 
 #To Add a new customer
-def addcust():
-    name=input("Enter Customer name: ")
-    address=input("Enter Customer address: ")
-    while True:
-        contact=input("Enter phone no.: ")
-        if len(contact)!=10:
-            print("INVALID NUMBER TRY AGAIN")
-        else:
-            break
+def addcust(name,address,contact):
     val=(name,address,contact)
     ins="INSERT INTO customer(name,address,contact) VALUES (%s,%s,%s);"
     mycursor.execute(ins,val)
     mydb.commit()
 
 #To add a new supplier
-def addsupp():
-    name=input("Enter supplier name: ")
-    address=input("Enter supplier address: ")
-    material=input("Enter material type: ")
+def addsupp(name,address,material):
     val=(name, address, material)
     ins="INSERT INTO supplier(sname,address,material) VALUES (%s,%s,%s);"
     mycursor.execute(ins, val)
     mydb.commit()
 
 #To add a new type of Garment
-def addgarment():
-    t=input("Enter type of garment: ")
-    qty=int(input("Enter quantity of garment: "))
-    price=int(input("Enter Price per unit garment: "))
-    mycursor.execute("SELECT sid FROM supplier;")
-    supp=mycursor.fetchall()
-    while True:#To check for valid supplier
-        sid=int(input("Enter supplier id: "))
-        if (sid,) in supp:
-            a=(t,qty,price,sid)
-            mycursor.execute("INSERT INTO garments(type,qty,price,sid) VALUES(%s,%s,%s,%s);", a)
-            mydb.commit()
-            mycursor.nextset()
-            break
-        else:
-            print("Invalid supplier id")
+def addgarment(t,qty,price,sid):
+    a=(t,qty,price,sid)
+    mycursor.execute("INSERT INTO garments(type,qty,price,sid) VALUES(%s,%s,%s,%s);", a)
+    mydb.commit()
+       
 
 
 #To add a new employee
-def addemp():
-    name=input("Enter Employee name: ")
-    address=input("Enter Employee address: ")
-    age=int(input("Enter Employee age: "))
-    sal=int(input("Enter Employee salary: "))
-    comm=float(input("Enter Employee commission: "))
+def addemp(name,address,age,sal,comm):
     ins="INSERT INTO employee(ename,address,age,salary,comm) VALUES(%s,%s,%s,%s,%s);"
     val=(name, address, age, sal, comm)
     mycursor.execute(ins, val)
@@ -169,17 +142,9 @@ JOIN supplier ON purchase.sid=supplier.sid;")
         print(i)
 
         
-def rememp(): #To remove an employee
-    mycursor.execute("Select empid from employee;")
-    emp = mycursor.fetchall()
-    for i in emp:
-        print(i)
-    empid=int(input("Enter empid: "))
-    if (empid,) in emp:
-        mycursor.execute("delete from employee where empid=(%s);",(empid,))
-        mydb.commit()
-    else:
-        menu()
+def rememp(empid): #To remove an employee
+    mycursor.execute("delete from employee where empid=(%s);",(empid,))
+    mydb.commit()
 
 def menu():
     while True:
