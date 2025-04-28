@@ -225,8 +225,20 @@ def view_all_sales():
     tk.Label(root, text="All Sales", font=("Arial", 20), bg="white").pack(pady=20)
 
     sales = processes.allsales()
+
+    table_frame = tk.Frame(root)
+    table_frame.pack()
+
+    columns = ("Sale ID", "Customer ID", "Employee ID", "Amount", "Employee")
+
+    tree = ttk.Treeview(table_frame, columns=columns, show="headings", height=15)
+    for col in columns:
+        tree.heading(col, text=col)
+        tree.column(col, width=120, anchor="center")
     for sale in sales:
-        tk.Label(root, text=str(sale), font=("Arial", 10), bg="white").pack()
+        tree.insert("", "end", values=sale)
+
+    tree.pack()
 
     go_home_button()
 
@@ -236,8 +248,22 @@ def view_all_purchases():
     tk.Label(root, text="All Purchases", font=("Arial", 20), bg="white").pack(pady=20)
 
     purchases = processes.allpurchase()
+
+    table_frame = tk.Frame(root)
+    table_frame.pack()
+
+    columns = ("Purchase ID", "Supplier ID", "Garment ID", "Price", "Quantity", "Supplier")
+
+    tree = ttk.Treeview(table_frame, columns=columns, show="headings", height=15)
+
+    for col in columns:
+        tree.heading(col, text=col)
+        tree.column(col, width=120, anchor="center")
+
     for purchase in purchases:
-        tk.Label(root, text=str(purchase), font=("Arial", 10), bg="white").pack()
+        tree.insert("", "end", values=purchase)
+
+    tree.pack()
 
     go_home_button()
 

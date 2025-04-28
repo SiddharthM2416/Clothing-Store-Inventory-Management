@@ -5,11 +5,10 @@ mycursor.execute('Create database if not exists cltstr;')
 mycursor.execute('use cltstr;')
 
 customer="CREATE TABLE if not exists CUSTOMER(\
-custid int auto_increment,\
-name varchar(20),\
-address varchar(15),\
-contact char(10),\
-primary key(custid,contact));"
+custid INT AUTO_INCREMENT PRIMARY KEY,\
+name VARCHAR(20),\
+address VARCHAR(15),\
+contact CHAR(10));"
 
 supplier="CREATE TABLE if not exists SUPPLIER(\
 sid int auto_increment primary key,\
