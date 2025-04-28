@@ -50,3 +50,5 @@ def create():
     for i in l1:
         mycursor.execute(i)
 
+create()
+
