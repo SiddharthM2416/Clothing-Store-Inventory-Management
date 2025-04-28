@@ -38,7 +38,8 @@ def home():
     ]
 
     for idx, (text, command) in enumerate(options):
-        btn = tk.Button(button_frame, text=text, command=command, width=20, height=2, bg="lightblue", font=("Arial", 12))
+        btn = tk.Button(button_frame, text=text, command=command, width=20, height=2,\
+                        bg="lightblue", font=("Arial", 12))
         btn.grid(row=idx//2, column=idx%2, padx=20, pady=10)
 
 # Go to Home Button
@@ -66,7 +67,8 @@ def add_customer_page():
         try:
             if len(contact.get()) != 10:
                 raise ValueError("Contact must be 10 digits")
-            processes.addcust(name.get(), address.get(), contact.get())  # Passing collected data to backend
+            processes.addcust(name.get(), address.get(), contact.get())  \
+                                          # Passing collected data to backend
             messagebox.showinfo("Success", "Customer added successfully!")
             home()
         except Exception as e:
@@ -86,7 +88,8 @@ def add_employee_page():
     salary = tk.Entry(root, width=30)
     comm = tk.Entry(root, width=30)
 
-    fields = [("Name", name), ("Address", address), ("Age", age), ("Salary", salary), ("Commission", comm)]
+    fields = [("Name", name), ("Address", address), ("Age", age), ("Salary", salary),\
+              ("Commission", comm)]
 
     for label, entry in fields:
         tk.Label(root, text=label, font=("Arial", 12), bg="white").pack()
@@ -94,7 +97,8 @@ def add_employee_page():
 
     def submit():
         try:
-            processes.addemp(name.get(), address.get(), int(age.get()), int(salary.get()), float(comm.get()))  # Pass data to backend
+            processes.addemp(name.get(), address.get(), int(age.get()), int(salary.get()),\
+                             float(comm.get()))  # Pass data to backend
             messagebox.showinfo("Success", "Employee added successfully!")
             home()
         except Exception as e:
@@ -137,13 +141,15 @@ def add_garment_page():
     price = tk.Entry(root, width=30)
     sid = tk.Entry(root, width=30)
 
-    for label, entry in [("Type", gtype), ("Quantity", qty), ("Price per Unit", price), ("Supplier ID", sid)]:
+    for label, entry in [("Type", gtype), ("Quantity", qty), \
+                         ("Price per Unit", price), ("Supplier ID", sid)]:
         tk.Label(root, text=label, font=("Arial", 12), bg="white").pack()
         entry.pack()
 
     def submit():
         try:
-            processes.addgarment(gtype.get(), int(qty.get()), int(price.get()), int(sid.get()))  # Pass data to backend
+            processes.addgarment(gtype.get(), int(qty.get()), int(price.get()), int(sid.get()))\
+                                              # Pass data to backend
             messagebox.showinfo("Success", "Garment added successfully!")
             home()
         except Exception as e:
@@ -190,13 +196,15 @@ def new_purchase_page():
     price = tk.Entry(root, width=30)
     qty = tk.Entry(root, width=30)
 
-    for label, entry in [("Supplier ID", sid), ("Garment ID", gid), ("Total Price", price), ("Quantity", qty)]:
+    for label, entry in [("Supplier ID", sid), ("Garment ID", gid),\
+                         ("Total Price", price), ("Quantity", qty)]:
         tk.Label(root, text=label, font=("Arial", 12), bg="white").pack()
         entry.pack()
 
     def submit():
         try:
-            processes.newpurchase(int(sid.get()), int(gid.get()), int(price.get()), int(qty.get()))  # Pass data to backend
+            processes.newpurchase(int(sid.get()), int(gid.get()), \
+                                  int(price.get()), int(qty.get()))  # Pass data to backend
             messagebox.showinfo("Success", "Purchase recorded successfully!")
             home()
         except Exception as e:
